@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  mariadb:
+    build: ./  # Use the Dockerfile in the current directory
+    container_name: mariadb_test
+    environment:
+      MYSQL_ROOT_PASSWORD: supersecurepassword  # Root password for MariaDB
+    ports:
+      - "3306:3306"  # Expose the MariaDB port
+    volumes:
+      - mariadb_data:/var/lib/mysql  # Persist the database data
+    networks:
+      - mariadb_network
+
+volumes:
+  mariadb_data:  # Volume to persist MariaDB data
+
+networks:
+  mariadb_network:  # Create a custom network
+    driver: bridge
