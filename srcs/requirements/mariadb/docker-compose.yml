@@ -34,10 +34,14 @@ networks:
 # SHOW DATABASES;
 
 
-# close
-# docker-compose down
+### close
 # docker-compose down -v
+# docker rmi <IMAGE_ID>
 
-# check for trash
+
+### check for trash
 # docker ps -a
+
+
+# https://localhost:8443
 

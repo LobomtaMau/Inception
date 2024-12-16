@@ -30,3 +30,6 @@ Comandos Docker:
 Comandos Docker-Compose:
 # docker network ls
 # docker network [name]
+
+
+Create a Dockerfile to install MariaDB 
