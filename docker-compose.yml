@@ -1,0 +1,53 @@
+services:
+  mariadb:
+    build: ./srcs/requirements/mariadb
+    container_name: mariadb_test
+    environment:
+      MYSQL_ROOT_PASSWORD: wp_password
+      MYSQL_DATABASE: wp_database
+      MYSQL_USER: wp_user
+      MYSQL_PASSWORD: wp_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - app_network
+
+  wordpress:
+    build: ./srcs/requirements/wordpress
+    container_name: wordpress_test
+    depends_on:
+      - mariadb
+    environment:
+      WORDPRESS_DB_HOST: mariadb
+      WORDPRESS_DB_USER: wp_user
+      WORDPRESS_DB_PASSWORD: wp_password
+      WORDPRESS_DB_NAME: wp_database
+    ports:
+      - "9000:9000"
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - app_network
+
+  nginx:
+    build: ./srcs/requirements/nginx
+    container_name: nginx_test
+    depends_on:
+      - wordpress
+    ports:
+      - "443:443"
+    volumes:
+      - nginx_data:/etc/nginx
+    networks:
+      - app_network
+
+volumes:
+  mariadb_data:
+  wordpress_data:
+  nginx_data:
+
+networks:
+  app_network:
+    driver: bridge

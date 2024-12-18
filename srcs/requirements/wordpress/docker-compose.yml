@@ -1,0 +1,24 @@
+services:
+  wordpress:
+    build: ./
+    container_name: wordpress_test
+    environment:
+      WORDPRESS_DB_HOST: mariadb:3306
+      WORDPRESS_DB_USER: wp_use
+      WORDPRESS_DB_PASSWORD: wp_pass
+      WORDPRESS_DB_NAME: wp_database
+    ports:
+      - "9000:9000"
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - wordpress_network
+    depends_on:
+      - mariadb  # Ensure MariaDB starts before WordPress
+
+volumes:
+  wordpress_data:  # Persist WordPress files
+
+networks:
+  wordpress_network:
+    driver: bridge
