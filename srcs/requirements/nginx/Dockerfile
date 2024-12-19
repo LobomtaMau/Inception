@@ -1,16 +1,27 @@
+FROM debian:bullseye
 
-FROM nginx:stable-alpine
+RUN apt-get update && \
+    apt-get install -y \
+    # apt-utils \
+    nginx openssl && \
+    rm -rf /var/lib/apt/lists/*
 
-# Copy your custom configuration file
 COPY ./conf/nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copy SSL certificates (self-signed for testing)
 COPY ./ssl /etc/nginx/ssl
-
-# Copy static website files to the container
-COPY ./html /usr/share/nginx/html
 
 EXPOSE 443
 
-# Command to start NGINX
 CMD ["nginx", "-g", "daemon off;"]
+
+# FROM nginx:stable-alpine
+
+# COPY ./conf/nginx.conf /etc/nginx/conf.d/default.conf
+
+# COPY ./ssl /etc/nginx/ssl
+
+# COPY ./html /usr/share/nginx/html
+
+# EXPOSE 443
+
+# CMD ["nginx", "-g", "daemon off;"]

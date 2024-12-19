@@ -1,47 +1,27 @@
-version: '3.8'
+# version: '3.8'
 
-services:
-  mariadb:
-    image: mariadb_test
-    build: ./  # Use the Dockerfile in the current directory
-    container_name: mariadb_test
-    environment:
-      MYSQL_ROOT_PASSWORD: 333
-    ports:
-      - "3306:3306"
-    volumes:
-      - mariadb_data:/var/lib/mysql
-      # Persist the database data
-    networks:
-      - mariadb_network
+# services:
+#   mariadb:
+#     image: mariadb_test
+#     build: ./  # Use the Dockerfile in the current directory
+#     container_name: mariadb_test
+#     environment:
+#       MYSQL_ROOT_PASSWORD: 333
+#     ports:
+#       - "3306:3306"
+#     volumes:
+#       - mariadb_data:/var/lib/mysql
+#       # Persist the database data
+#     networks:
+#       - mariadb_network
 
-volumes:
-  mariadb_data:  # Volume to persist MariaDB data
+# volumes:
+#   mariadb_data:  # Volume to persist MariaDB data
 
-networks:
-  mariadb_network:
-    driver: bridge
-    #tipos de network ver//
+# networks:
+#   mariadb_network:
+#     driver: bridge
+#     #tipos de network ver//
 
-
-# start
-# cd Inception/srcs/requirements/mariadb
-# docker-compose build
-# docker-compose up -d
-# docker ps
-
-# docker exec -it mariadb_test mysql -u root -p
-# SHOW DATABASES;
-
-
-### close
-# docker-compose down -v
-# docker rmi <IMAGE_ID>
-
-
-### check for trash
-# docker ps -a
-
-
-# https://localhost:8443
+# # https://localhost:8443
 

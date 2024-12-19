@@ -33,3 +33,25 @@ Comandos Docker-Compose:
 
 
 Create a Dockerfile to install MariaDB 
+# to get in
+# mysql -h mariadb -u wp_user -p
+
+
+# # start
+# # cd Inception/srcs/requirements/mariadb
+# # docker-compose build
+# # docker-compose up -d
+# # docker ps
+
+# # docker exec -it mariadb_test mysql -u root -p
+# # SHOW DATABASES;
+
+
+# ### close
+# # docker-compose down -v
+# # docker rmi <IMAGE_ID>
+
+
+# ### check for trash
+# # docker ps -a
+

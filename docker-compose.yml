@@ -7,12 +7,13 @@ services:
       MYSQL_DATABASE: wp_database
       MYSQL_USER: wp_user
       MYSQL_PASSWORD: wp_password
-    ports:
-      - "3306:3306"
+
+
     volumes:
       - mariadb_data:/var/lib/mysql
     networks:
-      - app_network
+      - icpt_network
+    restart: "on-failure"
 
   wordpress:
     build: ./srcs/requirements/wordpress
@@ -24,12 +25,13 @@ services:
       WORDPRESS_DB_USER: wp_user
       WORDPRESS_DB_PASSWORD: wp_password
       WORDPRESS_DB_NAME: wp_database
-    ports:
-      - "9000:9000"
+    # ports:
+    #   - "9000:9000"
     volumes:
       - wordpress_data:/var/www/html
     networks:
-      - app_network
+      - icpt_network
+    restart: "on-failure"
 
   nginx:
     build: ./srcs/requirements/nginx
@@ -37,17 +39,25 @@ services:
     depends_on:
       - wordpress
     ports:
-      - "443:443"
+      - "8443:80" #alterar
     volumes:
-      - nginx_data:/etc/nginx
+      - wordpress_data:/var/www/html
     networks:
-      - app_network
+      - icpt_network
+    restart: "on-failure"
 
 volumes:
   mariadb_data:
+    driver_opts:
+      type : none
+      device: /home/mbaptist/Desktop/work_42/Inception/dbInception
+      o: bind ### ler sobre isto
   wordpress_data:
-  nginx_data:
+    driver_opts:
+      type : none
+      device: /home/mbaptist/Desktop/work_42/Inception/wpInception
+      o: bind ### ler sobre isto
 
 networks:
-  app_network:
+  icpt_network:
     driver: bridge
