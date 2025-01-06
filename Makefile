@@ -18,8 +18,8 @@ clean: down
 	@echo "Cleaning up unused volumes..."
 	docker volume prune -f
 	@echo "Cleaning up unused images..."
-	docker image prune -f
+	docker rmi -f mariadb_test_img wordpress_test_img nginx_test_img
 
 re: clean all
 
-ex: 
+ex: #systen prune

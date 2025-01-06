@@ -1,27 +1,17 @@
-FROM debian:bullseye
+FROM debian:bullseye-slim
 
 RUN apt-get update && \
     apt-get install -y \
-    # apt-utils \
+    apt-utils \
     nginx openssl && \
     rm -rf /var/lib/apt/lists/*
 
-COPY ./conf/nginx.conf /etc/nginx/conf.d/default.conf
+RUN mkdir -p /var/www/html
 
-COPY ./ssl /etc/nginx/ssl
-
-EXPOSE 443
-
-CMD ["nginx", "-g", "daemon off;"]
-
-# FROM nginx:stable-alpine
 
 # COPY ./conf/nginx.conf /etc/nginx/conf.d/default.conf
-
 # COPY ./ssl /etc/nginx/ssl
 
-# COPY ./html /usr/share/nginx/html
+EXPOSE 80 443
 
-# EXPOSE 443
-
-# CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]
