@@ -23,7 +23,7 @@ clean: down
 	@echo "Cleaning up unused volumes..."
 	docker volume prune -f
 	@echo "Cleaning up unused images..."
-	docker rmi -f mariadb_test_img wordpress_test_img nginx_test_img
+	docker rmi -f inception-mariadb inception-nginx inception-wordpress
 # docker network rm $$(docker network ls --filter "name=$(NAME)" -q)
 
 re: clean all
