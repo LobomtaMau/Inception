@@ -47,11 +47,13 @@ volumes:
     driver_opts:
       type : none
       device: /home/mbaptist/Desktop/work_42/Inception/dbInception
+      # /home/mbaptist/inception/vol_db
       o: bind
   wordpress_data:
     driver_opts:
       type : none
       device: /home/mbaptist/Desktop/work_42/Inception/wpInception
+      # /home/mbaptist/inception/vol_wp
       o: bind
 
 networks:
