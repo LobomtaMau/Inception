@@ -1,5 +1,5 @@
 srcs/secrets/
-*.env
+# *.env
 *.log
 wordpress.zip
 mysql_root_password.txt
