@@ -1,6 +1,11 @@
-# makefile
 
-all: build up
+all: setup build up
+
+setup:
+	@echo "Creating necessary directories & files..."
+	mkdir -p ./vol_db
+	mkdir -p ./vol_wp
+	@if [ ! -f ./mysql_root_password.txt ]; then echo "wp_pass" > ./mysql_root_password.txt; fi
 
 build:
 	@echo "Building all Docker images..."
