@@ -1,9 +1,7 @@
 srcs/secrets/
 # *.env
 *.log
-wordpress.zip
 mysql_root_password.txt
-dbInception/
-wpInception/
 vol_db/
 vol_wp/
+.vscode/

@@ -8,7 +8,10 @@ RUN apt-get update && \
 
 RUN mkdir -p /var/www/html
 
+COPY ./ssl /etc/nginx/ssl
+COPY ./conf/nginx.conf /etc/nginx/conf.d/default.conf
 
-EXPOSE 80 443
+
+EXPOSE 443
 
 CMD ["nginx", "-g", "daemon off;"]

@@ -1,18 +1,21 @@
-FROM php:8.1-fpm
+FROM debian:bullseye-slim
 
 RUN apt-get update && apt-get install -y \
+    php7.4-fpm \
+    php7.4-mysql \
+    php7.4-curl \
+    php7.4-gd \
+    php7.4-mbstring \
+    php7.4-xml \
+    php7.4-zip \
     curl \
-    mariadb-client \
-    unzip \
-    && docker-php-ext-install mysqli
+    wget \
+    unzip && \
+    rm -rf /var/lib/apt/lists/*
 
-# WORKDIR /var/www/html
-
-# COPY ./html /var/www/html
-
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html
+RUN mkdir -p /var/www/html
 
 EXPOSE 9000
 
-CMD ["php-fpm"]
+CMD ["php-fpm7.4", "-F"]
+
