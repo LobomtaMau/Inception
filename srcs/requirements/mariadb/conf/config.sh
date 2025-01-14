@@ -1,14 +1,24 @@
 #!/bin/bash
 
-# Load the root password from the secret
-MYSQL_ROOT_PASSWORD=$(cat /run/secrets/mysql_root_password)
+# MYSQL_ROOT_PASSWORD=$(cat /run/secrets/mysql_root_password)
 
 if [ ! -d "/var/lib/mysql/$MYSQL_DATABASE" ]; then
     echo "Configuring MariaDB..."
 
-    mysqld_safe &
+    service mariadb start
+    sleep 1
 
-    sleep 3
+    mysql_secure_installation <<-END
+	y
+	$MYSQL_ROOT_PASSWORD
+	$MYSQL_ROOT_PASSWORD
+	y
+	y
+	y
+	y
+	END
+
+
 
 mysql -u root <<-EOF
     CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE;
@@ -16,9 +26,9 @@ mysql -u root <<-EOF
     GRANT ALL PRIVILEGES ON '$MYSQL_DATABASE'.* TO '$MYSQL_USER'@'%';
     FLUSH PRIVILEGES;
     ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';
-    FLUSH PRIVILEGES;
 EOF
 
+sleep 1
     mysqladmin -u root -p"$MYSQL_ROOT_PASSWORD" shutdown
     echo "Database created. Shutting down MariaDB..."
 fi

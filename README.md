@@ -55,3 +55,6 @@ Create a Dockerfile to install MariaDB
 # ### check for trash
 # # docker ps -a
 
+# how to redirect
+# ~/etc   //hosts
+# sudo nano 127.0.0.1       mbaptist.42.fr

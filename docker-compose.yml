@@ -2,12 +2,15 @@ services:
   mariadb:
     build: ./srcs/requirements/mariadb
     container_name: mariadb_test
-    secrets:
-      - mysql_root_password
-    environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    # secrets:
+    #   - mysql_root_password
+    env_file:
+      - .env
+    # environment:
+    #   MYSQL_DATABASE: ${MYSQL_DATABASE}
+    #   MYSQL_USER: ${MYSQL_USER}
+    #   MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    #   MYSQL_HOST: ${MYSQL_HOST}
     volumes:
       - mariadb_data:/var/lib/mysql
     networks:
@@ -23,6 +26,7 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_HOST: ${MYSQL_HOST}
     volumes:
       - wordpress_data:/var/www/html
     networks:
@@ -35,7 +39,7 @@ services:
     depends_on:
       - wordpress
     ports:
-      - "8443:443" 
+      - "443:443" 
     volumes:
       - wordpress_data:/var/www/html
     networks:
@@ -58,6 +62,6 @@ networks:
   icpt_network:
     driver: bridge
 
-secrets:
-  mysql_root_password:
-    file: ./mysql_root_password.txt
+# secrets:
+#   mysql_root_password:
+#     file: ./mysql_root_password.txt
