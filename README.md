@@ -58,3 +58,12 @@ Create a Dockerfile to install MariaDB
 # how to redirect
 # ~/etc   //hosts
 # sudo nano 127.0.0.1       mbaptist.42.fr
+
+# "docker stop $(docker ps -qa); docker rm $(docker ps -qa); docker rmi -f $(docker images -qa); docker volume rm $(docker volumes ls -q); docker network rm $(docker networks ls -q) 2>/dev/null"
+
+# docker exec -it mariadb bash
+# mariadb -u root -p
+# show databases;
+# use wp_database;
+# show tables;
+# select * from wp_users

@@ -7,3 +7,5 @@ vol_wp/
 .vscode/
 dbInception/
 wpInception/
+requirements/vol_db/
+requirements/vol_wp/

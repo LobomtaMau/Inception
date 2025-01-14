@@ -1,14 +1,10 @@
 services:
   mariadb:
-    build: ./srcs/requirements/mariadb
-    container_name: mariadb_test
+    build: ./requirements/mariadb
+    image: mariadb
+    container_name: mariadb
     env_file:
       - .env
-    # environment:
-    #   MYSQL_DATABASE: ${MYSQL_DATABASE}
-    #   MYSQL_USER: ${MYSQL_USER}
-    #   MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    #   MYSQL_HOST: ${MYSQL_HOST}
     volumes:
       - mariadb_data:/var/lib/mysql
     networks:
@@ -16,17 +12,13 @@ services:
     restart: "on-failure"
 
   wordpress:
-    build: ./srcs/requirements/wordpress
-    container_name: wordpress_test
+    build: ./requirements/wordpress
+    image: wordpress
+    container_name: wordpress
     depends_on:
       - mariadb
     env_file:
       - .env
-    # environment:
-    #   MYSQL_DATABASE: ${MYSQL_DATABASE}
-    #   MYSQL_USER: ${MYSQL_USER}
-    #   MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    #   MYSQL_HOST: ${MYSQL_HOST}
     volumes:
       - wordpress_data:/var/www/html
     networks:
@@ -34,8 +26,9 @@ services:
     restart: "on-failure"
 
   nginx:
-    build: ./srcs/requirements/nginx
-    container_name: nginx_test
+    build: ./requirements/nginx
+    image: nginx
+    container_name: nginx
     depends_on:
       - wordpress
     ports:
@@ -48,14 +41,16 @@ services:
 
 volumes:
   mariadb_data:
+    name: mariadb_data
     driver_opts:
       type : none
-      device: /home/mbaptist/inception/vol_db #/home/struf/inception/vol_db
+      device: /home/mbaptist/data/vol_db
       o: bind
   wordpress_data:
+    name: wordpress_data
     driver_opts:
       type : none
-      device: /home/mbaptist/inception/vol_wp # /home/struf/inception/vol_wp
+      device: /home/mbaptist/data/vol_wp
       o: bind
 
 networks:

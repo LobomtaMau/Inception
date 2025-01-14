@@ -13,9 +13,6 @@ else
     echo "Downloading WordPress..."
     wp core download --allow-root
 
-    # wp config create --allow-root --dbname=$MYSQL_DATABASE \
-    #     --dbuser=$MYSQL_USER --dbpass=$MYSQL_PASSWORD --dbhost=$MYSQL_HOST
-
     echo "Installing WordPress..."
     wp core install --allow-root --url=$WP_URL \
         --title=$WP_TITLE \

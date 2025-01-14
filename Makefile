@@ -1,37 +1,36 @@
-# Makefile for Docker Inception Project
+# Makefile
+
+COMPOSE_FILE = srcs/docker-compose.yml
+
 
 all: setup build up
 
 setup:
 	@echo "Creating necessary directories & files..."
-	mkdir -p ./vol_db ./vol_wp
-#	@if [ ! -f ./mysql_root_password.txt ]; then echo "wp_pass" > ./mysql_root_password.txt; fi
+	mkdir -p /home/mbaptist/data/vol_db /home/mbaptist/data/vol_wp
 
 build:
 	@echo "Building all Docker images..."
-#	docker-compose build
-	docker compose build
+	docker compose -f $(COMPOSE_FILE) build
 
 up:
 	@echo "Starting all containers..."
-#	docker-compose up -d
-	docker compose up -d
+	docker compose -f $(COMPOSE_FILE) up -d
 
 down:
 	@echo "Stopping all containers..."
-#	docker-compose down
-	docker compose down
+	docker compose -f $(COMPOSE_FILE) down
 
 clean: down
 	@echo "Cleaning up Docker resources..."
-	docker image prune -af
-#	docker volume prune -f
-	docker volume rm inception_mariadb_data inception_wordpress_data || true
-	docker network prune -f
+	-docker image prune -af
+#	-docker volume rm $(docker volume ls -q) || true
+	docker volume rm mariadb_data wordpress_data || true
+	-docker network prune -f
 
 xxxclean: clean
 	@echo "Removing setup directories..."
-	sudo rm -rf ./vol_db ./vol_wp ./mysql_root_password.txt
+	sudo rm -rf /home/mbaptist/data/vol_db /home/mbaptist/data/vol_wp
 
 re: xxxclean all
 
@@ -42,4 +41,4 @@ status:
 	@echo
 	docker volume ls
 	@echo
-	docker network ls
+	docker network ls --filter "name=icpt_network"
