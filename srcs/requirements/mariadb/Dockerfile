@@ -15,3 +15,5 @@ RUN chmod +x /home/config.sh
 ENTRYPOINT ["/home/config.sh"]
 
 CMD ["mysqld_safe", "--bind-address=0.0.0.0"]
+
+# CMD ["tail", "-f", "/dev/null"]

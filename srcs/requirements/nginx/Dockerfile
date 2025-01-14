@@ -6,7 +6,8 @@ RUN apt-get update && \
     nginx openssl && \
     rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /var/www/html
+RUN chown -R www-data:www-data /var/www/html
+# mkdir -p /var/www/html && 
 
 COPY ./ssl /etc/nginx/ssl
 

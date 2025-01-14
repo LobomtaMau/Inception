@@ -5,19 +5,22 @@ all: setup build up
 setup:
 	@echo "Creating necessary directories & files..."
 	mkdir -p ./vol_db ./vol_wp
-	@if [ ! -f ./mysql_root_password.txt ]; then echo "wp_pass" > ./mysql_root_password.txt; fi
+#	@if [ ! -f ./mysql_root_password.txt ]; then echo "wp_pass" > ./mysql_root_password.txt; fi
 
 build:
 	@echo "Building all Docker images..."
-	docker-compose build
+#	docker-compose build
+	docker compose build
 
 up:
 	@echo "Starting all containers..."
-	docker-compose up -d
+#	docker-compose up -d
+	docker compose up -d
 
 down:
 	@echo "Stopping all containers..."
-	docker-compose down
+#	docker-compose down
+	docker compose down
 
 clean: down
 	@echo "Cleaning up Docker resources..."
