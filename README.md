@@ -69,3 +69,6 @@ Create a Dockerfile to install MariaDB
 # select * from wp_users;
 
 # /wp-admin/
+
+# ssh-keygen -t rsa -b 4096 -C "mbaptist@student.42lisboa.com"
+# cd ~/.ssh
