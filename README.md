@@ -62,8 +62,10 @@ Create a Dockerfile to install MariaDB
 # "docker stop $(docker ps -qa); docker rm $(docker ps -qa); docker rmi -f $(docker images -qa); docker volume rm $(docker volumes ls -q); docker network rm $(docker networks ls -q) 2>/dev/null"
 
 # docker exec -it mariadb bash
-# mariadb -u root -p
+# mariadb -u root -p  ///111
 # show databases;
 # use wp_database;
 # show tables;
-# select * from wp_users
+# select * from wp_users;
+
+# /wp-admin/
